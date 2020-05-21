@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!--开启bean扫描，spring会去扫描@Controller注解的类-->
+    <context:component-scan base-package="com.nero.spring.web"/>
+
+    <!--1-UrlBasedViewResolver-->
+    <!--注册UrlBasedViewResolver视图解析器 假如视图名称为'hello' 最终的视图名称将是/WEB-INF/content/hello.jsp-->
+    <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
+    <!--    &lt;!&ndash;视图解析时用于拼接的前缀&ndash;&gt;-->
+    <!--    <property name="prefix" value="/WEB-INF/content/"/>-->
+    <!--    &lt;!&ndash;视图解析时用于拼接的后缀&ndash;&gt;-->
+    <!--    <property name="suffix" value=".jsp"/>-->
+    <!--    &lt;!&ndash;必须指定viewClass，表示该视图解析器应该返回什么类型的视图&ndash;&gt;-->
+    <!--    <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>-->
+    <!--</bean>-->
+
+    <!--2-InternalResourceViewResolver-->
+    <!--注册InternalResourceViewResolver视图解析器 假如视图名称为'hello' 最终的视图名称将是/WEB-INF/content/hello.jsp-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--    &lt;!&ndash;视图解析时用于拼接的前缀&ndash;&gt;-->
+    <!--    <property name="prefix" value="/WEB-INF/content/"/>-->
+    <!--    &lt;!&ndash;视图解析时用于拼接的后缀&ndash;&gt;-->
+    <!--    <property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+
+    <!--3-FreeMarkerViewResolver-->
+    <!--注册FreeMarkerViewResolver视图解析器 假如视图名称为'hello' 最终的视图名称将是/WEB-INF/content/hello.jsp-->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <!--视图解析时用于拼接的前缀-->
+        <property name="prefix" value="fm_"/>
+        <!--视图解析时用于拼接的后缀-->
+        <property name="suffix" value=".ftl"/>
+    </bean>
+    <!--freemarker配置-->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!--指定freemark模板地址-->
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+    </bean>
+</beans>

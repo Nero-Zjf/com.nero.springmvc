@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!--开启bean扫描，spring会去扫描@Controller注解的类-->
+    <context:component-scan base-package="com.nero.spring.web"/>
+    <!--注意，以下配置了HandlerMapping、HandlerAdapter、ViewResolver的默认项,Spring4.0之后可以不需要配置，当没有配置时SpringMVC会使用默认配置-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+</beans>

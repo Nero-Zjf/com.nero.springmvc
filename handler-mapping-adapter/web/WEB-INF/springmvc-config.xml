@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!--开启bean扫描，spring会去扫描@Controller注解的类-->
+    <context:component-scan base-package="handler"/>
+    <!--注册bean：下面3个bean是Controller类型的handler-->
+    <bean name="/login" class="handler.locale.LoginController"/>
+    <bean name="userController" class="handler.UserController"/>
+    <bean name="custController" class="handler.CustController"/>
+    <!--注册bean：下面是Servlet类型的Handler-->
+    <bean name="/boss" class="handler.BossServlet"/>
+    <!--注册bean：下面是HttpRequestHandler类型的Handler-->
+    <bean name="/employee" class="handler.EmployeeHttpRequestHandler"/>
+
+    <!--BeanNameUrlHandlerMapping可以根据handler(包括Controller、Servlet、HttpReqestHandler类型的handler)的bean名称来自动映射（bean名称为url格式） 此配置将匹配 /login、/boss、/employee-->
+    <!--注意：如果同时注册了BeanNameUrlHandlerMapping和SimpleUrlHandlerMapping，可能存在重复映射的可能，当不会对程序运行造成影响-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <!--以下分别注册了类型为Controller、Servlet、HttpReqestHandler的handler的适配器-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+    <!--可以自动映射@RequestMapping修饰的控制器方法 spring 3.1后 用于替代DefaultAnnotationHandlerMapping-->
+    <!--注册可以映射@Controller、@RequestMapping注解的Handler， 此示例将/hello请求与HelloController的hello方法进行映射，此HandlerMapping最终返回的handler对象类型为HandlerMethod-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!--注册处理类型为HandlerMethod的Adapter-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+
+    <!--可以一次性配置多个url与处理器映射 此配置将匹配 /usr 和 /cust-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/user">userController</prop>
+                <prop key="/cust">custController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--可以自动映射@RequestMapping修饰的控制器方法，此HandlerMapping在spring 3.1后弃用，改为使用RequestMappingHanlderMapping-->
+    <!--此配置将匹配 /hello-->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>-->
+    <!--注册适配器，Spring 3.1已弃用，使用RequestMappingHandlerAdapter-->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+</beans>
