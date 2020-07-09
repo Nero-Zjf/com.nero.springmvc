@@ -12,8 +12,6 @@
             <!--contextConfigLocation是参数名称，该参数的值包含SpringMVC的配置文件路径-->
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/springmvc-config.xml</param-value>
-            <!--测试使用<mvc:annotation-driven/>-->
-            <!--<param-value>/WEB-INF/annotation-driven-test.xml</param-value>-->
         </init-param>
         <!-- 表示容器再启动时立即加载servlet -->
         <load-on-startup>1</load-on-startup>
@@ -21,7 +19,6 @@
     <!--Servlet映射声明-->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
-        <!-- 监听处理所有URL -->
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -19,3 +19,6 @@ SpringMVC基本demo（Handler采用@Controller注解的方式）
 ## locale1-resolver
 演示实现SpringMVC 国际化
 >使用 SessionLocaleResolver（更多详情查看com.nero.springmvc.locale1）
+
+## multipart-resolver
+spring mvc 上传

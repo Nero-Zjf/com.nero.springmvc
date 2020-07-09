@@ -10,8 +10,9 @@
         <module name="test" />
         <module name="view-resolver" />
         <module name="locale-resolver" />
-        <module name="handler-mapping-adapter" />
         <module name="basic-sample2" />
+        <module name="handler-mapping-adapter" />
+        <module name="multipart-resolver" />
       </profile>
     </annotationProcessing>
   </component>
